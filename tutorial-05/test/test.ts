@@ -8,8 +8,25 @@ const Transaction = artifacts.require("Transaction");
 contract("Transaction test", async accounts => {
     const [owner, A, B, T] = accounts;
     it("library", async () => {
-        expectRevert(await Transaction.deployed().then(i=>{
-            return i.test({from: A})
-        }))
+        const instance = await Transaction.deployed()
+        await expectRevert(instance.test(),"x")
+        await expectRevert(instance.test({
+            value: web3.utils.toWei("10", "ether"),
+            from:A
+        }),"x")
+        await expectEvent(
+            await instance.test({
+                value: web3.utils.toWei("10", "ether"),
+                from:owner
+            }),
+            "SenderLogger"
+        )
+        await expectEvent(
+            await instance.test({
+                value: web3.utils.toWei("10", "ether"),
+                from:owner
+            }),
+            "ValueLogger"
+        )
     });
 });
