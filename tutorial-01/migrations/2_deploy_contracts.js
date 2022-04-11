@@ -1,4 +1,4 @@
-var MyFirstContract=artifacts.require ("./contracts/MyFirstContract.sol");
+var MyFirstContract=artifacts.require ("MyFirstContractBank");
 module.exports = function(deployer) {
     deployer.deploy(MyFirstContract);
 }

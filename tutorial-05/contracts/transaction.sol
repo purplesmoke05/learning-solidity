@@ -1,4 +1,4 @@
-pragma solidity ^0.4.0;
+pragma solidity ^0.8.0;
 
 contract Transaction {
     
@@ -21,7 +21,7 @@ contract Transaction {
         owner = msg.sender;
     }
     
-    function () public payable isOwner validValue {
+    function test() public payable isOwner validValue {
         emit SenderLogger(msg.sender);
         emit ValueLogger(msg.value);
     }

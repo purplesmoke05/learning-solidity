@@ -1,4 +1,4 @@
-pragma solidity ^0.5.0;
+pragma solidity ^0.8.0;
 
 interface Regulator {
     function checkValue(uint amount) external returns (bool);
@@ -7,16 +7,23 @@ interface Regulator {
 
 contract Bank is Regulator {
     uint private value;
+    address private owner;
     
-    constructor(uint amount) public {
+    modifier ownerFunc {
+        require(owner == msg.sender);
+        _;
+    }
+
+    constructor(uint amount) {
         value = amount;
+        owner = msg.sender;
     }
     
-    function deposit(uint amount) public {
+    function deposit(uint amount) public ownerFunc {
         value += amount;
     }
     
-    function withdraw(uint amount) public {
+    function withdraw(uint amount) public ownerFunc {
         if (checkValue(amount)) {
             value -= amount;
         }
@@ -26,12 +33,12 @@ contract Bank is Regulator {
         return value;
     }
     
-    function checkValue(uint amount) public returns (bool) {
+    function checkValue(uint amount) public view returns (bool) {
         // Classic mistake in the tutorial value should be above the amount
         return value >= amount;
     }
     
-    function loan() public returns (bool) {
+    function loan() public view returns (bool) {
         return value > 0;
     }
 }
@@ -55,4 +62,22 @@ contract MyFirstContract is Bank(10) {
     function getAge() public view returns (uint) {
         return age;
     }
+}
+
+contract TestThrows {
+    function testAssert() public pure {
+        assert(1 == 2);
+    }
+    
+    function testRequire() public pure {
+        require(2 == 1);
+    }
+    
+    function testRevert() public pure {
+        revert();
+    }
+    // throw is deprecated
+    // function testThrow() public pure {
+    //     throw;
+    // }
 }

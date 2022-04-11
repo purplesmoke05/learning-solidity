@@ -1,4 +1,4 @@
-const Migrations = artifacts.require("MyFirstContractBank");
+const Migrations = artifacts.require("MyFirstContract")
 
 module.exports = function (deployer) {
   deployer.deploy(Migrations);

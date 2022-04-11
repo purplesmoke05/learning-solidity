@@ -1,4 +1,4 @@
-pragma solidity ^0.4.0;
+pragma solidity ^0.8.0;
 
 interface Regulator {
     function checkValue(uint amount) external returns (bool);
@@ -7,23 +7,16 @@ interface Regulator {
 
 contract Bank is Regulator {
     uint private value;
-    address private owner;
     
-    modifier ownerFunc {
-        require(owner == msg.sender);
-        _;
-    }
-
-    constructor(uint amount) public {
+    constructor(uint amount) {
         value = amount;
-        owner = msg.sender;
     }
     
-    function deposit(uint amount) public ownerFunc {
+    function deposit(uint amount) public {
         value += amount;
     }
-    
-    function withdraw(uint amount) public ownerFunc {
+
+    function withdraw(uint amount) public {
         if (checkValue(amount)) {
             value -= amount;
         }
@@ -33,12 +26,12 @@ contract Bank is Regulator {
         return value;
     }
     
-    function checkValue(uint amount) public returns (bool) {
+    function checkValue(uint amount) public view returns (bool) {
         // Classic mistake in the tutorial value should be above the amount
         return value >= amount;
     }
     
-    function loan() public returns (bool) {
+    function loan() public view returns (bool) {
         return value > 0;
     }
 }
@@ -47,11 +40,11 @@ contract MyFirstContract is Bank(10) {
     string private name;
     uint private age;
     
-    function setName(string newName) public {
+    function setName(string memory newName) public {
         name = newName;
     }
     
-    function getName() public view returns (string) {
+    function getName() public view returns (string memory) {
         return name;
     }
     
@@ -61,23 +54,5 @@ contract MyFirstContract is Bank(10) {
     
     function getAge() public view returns (uint) {
         return age;
-    }
-}
-
-contract TestThrows {
-    function testAssert() public pure {
-        assert(1 == 2);
-    }
-    
-    function testRequire() public pure {
-        require(2 == 1);
-    }
-    
-    function testRevert() public pure {
-        revert();
-    }
-    
-    function testThrow() public pure {
-        throw;
     }
 }
