@@ -1,0 +1,17 @@
+[[package]]
+name = "brownie"
+version = "0.5.1"
+description = "Common utilities and datastructures for Python applications."
+category = "main"
+optional = false
+python-versions = "*"
+
+[metadata]
+lock-version = "1.1"
+python-versions = "^3.10"
+content-hash = "902e1fbb07affbd6e25eb6a26cac6b4a38f56c793adefda76681a0604a104a1d"
+
+[metadata.files]
+brownie = [
+    {file = "Brownie-0.5.1.tar.gz", hash = "sha256:07f7d594feedf3d3dca160fd0bd1156e5077ef6ddb64ac759eebf1c56f83ce37"},
+]

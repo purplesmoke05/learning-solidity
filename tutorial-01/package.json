@@ -1,0 +1,24 @@
+{
+  "name": "tutorial-01",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "generate-types": "typechain --target=truffle-v5 'build/contracts/*.json'",
+    "postinstall": "truffle compile && npm run generate-types",
+    "build-migration-files": "tsc -p ./tsconfig.migrate.json --outDir ./migrations",
+    "migrate": "npm run build-migration-files && truffle migrate",
+    "test": "npm run postinstall && truffle test"
+  },
+  "dependencies": {
+    "@typechain/truffle-v5": "^8.0.0",
+    "@types/bn.js": "^5.1.0",
+    "@types/chai": "^4.3.0",
+    "@types/mocha": "^9.1.0",
+    "@types/web3": "^1.2.2",
+    "truffle": "^5.5.9",
+    "truffle-assertions": "^0.9.2",
+    "typechain": "^8.0.0",
+    "typescript": "^4.6.3"
+  }
+}
