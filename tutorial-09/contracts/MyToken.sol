@@ -1,6 +1,6 @@
-pragma solidity ^0.4.0;
+pragma solidity ^0.8.0;
 
-import "browser/ERC20.sol";
+import "./ERC20.sol";
 
 contract MyFirstToken is ERC20 {
     string public constant symbol = "MFT";
@@ -15,11 +15,11 @@ contract MyFirstToken is ERC20 {
             __balanceOf[msg.sender] = __totalSupply;
     }
     
-    function totalSupply() public constant returns (uint _totalSupply) {
+    function totalSupply() public returns (uint _totalSupply) {
         _totalSupply = __totalSupply;
     }
     
-    function balanceOf(address _addr) public constant returns (uint balance) {
+    function balanceOf(address _addr) public returns (uint balance) {
         return __balanceOf[_addr];
     }
     
@@ -51,7 +51,7 @@ contract MyFirstToken is ERC20 {
         return true;
     }
     
-    function allowance(address _owner, address _spender) public constant returns (uint remaining) {
+    function allowance(address _owner, address _spender) public returns (uint remaining) {
         return __allowances[_owner][_spender];
     }
 }

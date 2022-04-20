@@ -5,7 +5,7 @@ const {
 const TestLibrary = artifacts.require("TestLibrary");
 // const truffleAssert = require('truffle-assertions');
 contract("TestLibrary test", async accounts => {
-     it("library", async () => {
+    it("library", async () => {
         const instance = await TestLibrary.deployed()
         assert.equal((await instance.testIncrement(10)).toNumber(), 11)
         assert.equal((await instance.testDecrement(10)).toNumber(), 9)
